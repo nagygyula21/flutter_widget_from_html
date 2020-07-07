@@ -28,7 +28,6 @@ part 'ops/text.dart';
 part 'parser/border.dart';
 part 'parser/color.dart';
 part 'parser/css.dart';
-part 'parser/line_height.dart';
 part 'parser/length.dart';
 
 final _dataUriRegExp = RegExp(r'^data:image/\w+;base64,');
@@ -178,7 +177,7 @@ class WidgetFactory {
     }
 
     return image != null
-        ? ImageLayout(image, height: height, text: text, width: width)
+        ? ImageLayout(image, url: url, onTapImage: widget.onTapImage, height: height, text: text, width: width)
         : text != null ? Text(text) : null;
   }
 

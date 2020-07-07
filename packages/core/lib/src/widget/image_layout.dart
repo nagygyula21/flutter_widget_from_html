@@ -5,9 +5,12 @@ class ImageLayout extends StatefulWidget {
   final ImageProvider image;
   final String text;
   final double width;
+  final String url;
+  final void Function(String url) onTapImage;
 
-  ImageLayout(this.image, {this.height, Key key, this.text, this.width})
+  ImageLayout(this.image, {this.onTapImage, this.url, this.height, Key key, this.text, this.width})
       : assert(image != null),
+        assert(url != null),
         super(key: key);
 
   @override
@@ -68,10 +71,32 @@ class _ImageLayoutState extends State<ImageLayout> {
       // 1. From the beginning, via widget constructor
       // 2. From synchronized image info, immediately in the first build
       // 3. From async update / triggered state change (see above)
-      return CustomSingleChildLayout(
+
+      return Container(
+        child: GestureDetector(
+          child: CustomSingleChildLayout(
+            child: Image(image: widget.image, fit: BoxFit.cover),
+            delegate: _ImageLayoutDelegate(height: height, width: width),
+          ),
+          onTap: () {
+            widget.onTapImage?.call(widget.url);
+          },
+          /*gestures: {
+            MultipleTapGestureRecognizer: GestureRecognizerFactoryWithHandlers<
+                MultipleTapGestureRecognizer>(
+                  () => MultipleTapGestureRecognizer(),
+                  (instance) {
+                    print("sdfsfd");
+                //instance..onTap = () => context.parser.onImageTap?.call(src);
+              },
+            ),
+          },*/
+        ),
+      );
+      /*return CustomSingleChildLayout(
         child: Image(image: widget.image, fit: BoxFit.cover),
         delegate: _ImageLayoutDelegate(height: height, width: width),
-      );
+      );*/
     }
 
     return widget.text != null ? Text(widget.text) : widget0;
