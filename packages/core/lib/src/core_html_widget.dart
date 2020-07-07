@@ -12,6 +12,7 @@ import 'builder.dart';
 import 'core_data.dart';
 import 'core_widget_factory.dart';
 
+
 /// A widget that builds Flutter widget tree from HTML
 /// (supports most popular tags and stylings).
 class HtmlWidget extends StatefulWidget {
@@ -52,6 +53,9 @@ class HtmlWidget extends StatefulWidget {
   /// The callback when user taps a link.
   final void Function(String) onTapUrl;
 
+  // Image on tap
+  final void Function(String url) onTapImage;
+
   /// The amount of space by which to inset the table cell's contents.
   final EdgeInsets tableCellPadding;
 
@@ -72,6 +76,7 @@ class HtmlWidget extends StatefulWidget {
     this.factoryBuilder = _singleton,
     this.hyperlinkColor = const Color.fromRGBO(0, 0, 255, 1),
     Key key,
+    this.onTapImage,
     this.onTapUrl,
     this.tableCellPadding = const EdgeInsets.all(5),
     this.textStyle = const TextStyle(),

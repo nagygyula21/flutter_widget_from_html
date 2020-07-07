@@ -182,7 +182,7 @@ class WidgetFactory {
     }
 
     return image != null
-        ? ImageLayout(image, height: height, text: text, width: width)
+        ? ImageLayout(image, url: url, onTapImage: widget.onTapImage, height: height, text: text, width: width)
         : text != null ? Text(text) : null;
   }
 
