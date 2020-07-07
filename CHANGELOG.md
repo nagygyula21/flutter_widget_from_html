@@ -1,3 +1,7 @@
+## 0.4.2
+
+* Add support for onTapImage
+
 ## 0.4.1
 
 * BREAKING: Remove `TextStyleBuilders.recognizer` (#168)
